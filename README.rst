@@ -115,7 +115,7 @@ Make scripts executable
     **chmod +x /home/cowrie/scripts/blacklist_service.py**
 
 Create systemd service for blacklist monitoring
-    **sudo nano /etc/systemd/system/cowrie-blacklist.service**
+  **sudo nano /etc/systemd/system/cowrie-blacklist.service**
 
   Add the Following to Service
 [Unit]
