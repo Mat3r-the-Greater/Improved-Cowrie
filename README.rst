@@ -108,16 +108,16 @@ Many people have contributed to Cowrie over the years. Special thanks to:
 IP Blacklist Setup
 *****************
 Initialize database
-**sqlite3 /home/cowrie/data/blacklist.db < /home/cowrie/data/setup_blacklist.sql**
+  **sqlite3 /home/cowrie/data/blacklist.db < /home/cowrie/data/setup_blacklist.sql**
 
 Make scripts executable
-**chmod +x /home/cowrie/scripts/blacklist_monitor.py**
-**chmod +x /home/cowrie/scripts/blacklist_service.py**
+  **chmod +x /home/cowrie/scripts/blacklist_monitor.py**
+  **chmod +x /home/cowrie/scripts/blacklist_service.py**
 
 Create systemd service for blacklist monitoring
-**sudo nano /etc/systemd/system/cowrie-blacklist.service**
+  **sudo nano /etc/systemd/system/cowrie-blacklist.service**
 
-Add the Following to Service
+  Add the Following to Service
 [Unit]
 Description=Cowrie IP Blacklist Service
 After=network.target
@@ -134,26 +134,26 @@ RestartSec=10
 WantedBy=multi-user.target
 
 Enable and start the service
-**sudo systemctl enable cowrie-blacklist**
-**sudo systemctl start cowrie-blacklist**
+  **sudo systemctl enable cowrie-blacklist**
+  **sudo systemctl start cowrie-blacklist**
 
 Check service status
-**sudo systemctl status cowrie-blacklist**
+  **sudo systemctl status cowrie-blacklist**
 
 Blacklist Commands
 ******************
 Check blacklist statistics
-**python3 /home/cowrie/scripts/blacklist_monitor.py --stats**
+  **python3 /home/cowrie/scripts/blacklist_monitor.py --stats**
 
 Check if specific IP is blacklisted
-**python3 /home/cowrie/scripts/blacklist_monitor.py --check <IP>**
+  **python3 /home/cowrie/scripts/blacklist_monitor.py --check <IP>**
 
 Remove IP from blacklist
-**python3 /home/cowrie/scripts/blacklist_monitor.py --unban <IP>**
+  **python3 /home/cowrie/scripts/blacklist_monitor.py --unban <IP>**
 
 Add IP to blacklist
-**python3 /home/cowrie/scripts/blacklist_monitor.py --add <IP>**
+  **python3 /home/cowrie/scripts/blacklist_monitor.py --add <IP>**
 
 List all blacklisted IPs
-**python3 /home/cowrie/scripts/blacklist_monitor.py --list**
+  **python3 /home/cowrie/scripts/blacklist_monitor.py --list**
 
