@@ -103,3 +103,56 @@ Many people have contributed to Cowrie over the years. Special thanks to:
 * Florian Pelgrim (craneworks) for his work on code cleanup and Docker.
 * Guilherme Borges (sgtpepperpt) for SSH and telnet proxy (GSoC 2019)
 * And many many others.
+
+
+IP Blacklist Setup
+*****************
+Initialize database
+* sqlite3 /home/cowrie/data/blacklist.db < /home/cowrie/data/setup_blacklist.sql
+
+Make scripts executable
+* chmod +x /home/cowrie/scripts/blacklist_monitor.py
+* chmod +x /home/cowrie/scripts/blacklist_service.py
+
+Create systemd service for blacklist monitoring
+* sudo nano /etc/systemd/system/cowrie-blacklist.service
+    ****Add the Following to Service****
+[Unit]
+Description=Cowrie IP Blacklist Service
+After=network.target
+
+[Service]
+Type=simple
+User=cowrie
+WorkingDirectory=/home/cowrie
+ExecStart=/usr/bin/python3 /home/cowrie/scripts/blacklist_service.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+Enable and start the service
+* sudo systemctl enable cowrie-blacklist
+* sudo systemctl start cowrie-blacklist
+
+Check service status
+* sudo systemctl status cowrie-blacklist
+
+Blacklist Commands
+******************
+Check blacklist statistics
+* python3 /home/cowrie/scripts/blacklist_monitor.py --stats
+
+Check if specific IP is blacklisted
+* python3 /home/cowrie/scripts/blacklist_monitor.py --check <IP>
+
+Remove IP from blacklist
+* python3 /home/cowrie/scripts/blacklist_monitor.py --unban <IP>
+
+Add IP to blacklist
+* python3 /home/cowrie/scripts/blacklist_monitor.py --add <IP>
+
+List all blacklisted IPs
+* python3 /home/cowrie/scripts/blacklist_monitor.py --list
+
